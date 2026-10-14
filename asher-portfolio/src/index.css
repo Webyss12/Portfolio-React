@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+/* Optional webfonts. If they fail to load, the fallbacks in --font-* are used. */
+@font-face {
+  font-family: MonaSemi;
+  src: url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/static/MonaSansSemiCondensed-ExtraLight.woff2") format("woff2");
+  font-weight: 250;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: MonaSemi;
+  src: url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/static/MonaSansSemiCondensed-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: MonaSemi;
+  src: url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/static/MonaSansSemiCondensed-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Mona;
+  src: url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/static/MonaSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Design tokens: these become Tailwind classes (bg-accent, font-display, animate-letter-in ...) */
+@theme {
+  --color-accent: #ff630f;
+  --color-ink: #000000;
+  --color-line: #222222;
+  --color-line-strong: #333333;
+  --color-muted: #949494;
+  --color-muted-2: #aaaaaa;
+  --color-muted-3: #b8b8b8;
+
+  --font-display: MonaSemi, "Arial Narrow", Arial, sans-serif;
+  --font-body: Mona, Arial, sans-serif;
+  --font-utility: "PP Neue Montreal", Arial, sans-serif;
+
+  --ease-soft: cubic-bezier(.44, 0, .56, 1);
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-out-quint: cubic-bezier(.22, 1, .36, 1);
+
+  --animate-letter-in: letter-in .9s var(--ease-out-expo) both;
+  --animate-fade-in: fade-in .5s var(--ease-soft) both;
+  --animate-rise-in: rise-in .5s var(--ease-soft) both;
+  --animate-nav-in: nav-in .5s var(--ease-soft) both;
+  --animate-dialog-in: dialog-in .22s var(--ease-soft) both;
+  --animate-arrow-bounce: arrow-bounce 1.9s cubic-bezier(.45, 0, .3, 1) infinite;
+
+  @keyframes letter-in {
+    0% { opacity: 0; transform: translateY(115%) rotate(3deg) scale(.96); filter: blur(32px); }
+    65% { opacity: 1; filter: blur(0); }
+    100% { opacity: 1; transform: none; filter: blur(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(56px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes nav-in {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes dialog-in {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes arrow-bounce {
+    0%, 70%, 100% { transform: translateY(-3px); }
+    35% { transform: translateY(5px); }
+  }
+}
+
+html {
+  background: #000;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #ff630f;
+  color: #000;
+}
+
+/* Strong keyboard focus: orange ring with a dark gap so it reads over photos */
+:focus-visible {
+  outline: 2px solid #ff630f;
+  outline-offset: 6px;
+  box-shadow: 0 0 0 6px rgba(0, 0, 0, .85);
+}
+
+/* Hide the system cursor only once the custom cursor is actually running */
+html[data-custom-cursor] body,
+html[data-custom-cursor] a,
+html[data-custom-cursor] button {
+  cursor: none;
+}
