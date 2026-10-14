@@ -7,18 +7,18 @@ export const PERSONA: Persona = {
   lastName: 'Quinañola', // add a surname here if you want it in the big hero name
   monogram: 'ES', // Embedded Systems. Use any two letters you like.
   role: 'Embedded Systems & Web Developer',
-  tagline: 'I build a local AI library chatbot, plus ESP32 devices and their web apps.',
+tagline: 'I develop a local AI library chatbot with LLMs, semantic search and a Flask backend.',
   note: 'Student developer in Cebu, learning backend development.',
   heroLabel: 'Cebu, Philippines / Embedded & web / 001',
   statement: [
-  'Richito is building a local library chatbot,',
-  'a Flask backend with semantic search that',
-  'recommends only books the library really has,',
-  'after making ESP32 devices and the web',
-  'interfaces that control them.',
+  'Fourth-year BS Information Technology student at Cebu Technological',
+  'University Ginatilan Extension Campus, passionate about embedded systems, web',
+  'development, and backend engineering. Skilled at bridging hardware',
+  'and software, with a strong commitment to continuous learning',
+  'through hands-on projects and self-study.',
 ],
   intro:
-    'I connect hardware, cloud services and web interfaces into systems that work as a whole. I study at Cebu Technological University, Argao, and build projects on the side.',
+    'I connect hardware, cloud services and web interfaces into systems that work as a whole. I study at Cebu Technological University, Ginatilan Extension Campus, and build projects on the side.',
   disciplines: ['AI Chatbot', 'Backend & Data', 'Embedded Systems'],
   contactIntro: 'Have a project, looking for an internship, or something to build in mind? Tell me about it.',
   email: 'quinanolarich@gmail.com', // TODO: check this is the address you want visitors to use
