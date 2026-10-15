@@ -135,7 +135,9 @@ export function Hero({ modalOpen, onIntroStart }: HeroProps) {
   };
 
   const { monogram, firstName, lastName } = PERSONA;
-  const delayFor = (i: number) => 0.38 + i * 0.1; // 0.38, 0.48 ... 1.28
+  const totalLetters = monogram.length + firstName.length + lastName.length;
+  const step = totalLetters > 1 ? Math.min(0.1, 0.9 / (totalLetters - 1)) : 0.1; // longer names animate a bit faster
+  const delayFor = (i: number) => 0.38 + i * step;
   const role = appear(phase, 'fade', 1.18);
   const sup = appear(phase, 'fade', 1.48);
   const notes = appear(phase, 'rise', 1.55);
@@ -152,30 +154,49 @@ export function Hero({ modalOpen, onIntroStart }: HeroProps) {
       className="@container relative h-[900px] bg-black outline-none focus-visible:shadow-none min-[1441px]:h-[min(1100px,100svh)] max-[901px]:h-svh max-[901px]:min-h-[760px] max-[561px]:h-auto max-[561px]:min-h-[max(720px,100svh)]"
     >
       {/* z-0: portrait + WebGL canvas. Outer layer = scroll parallax, inner layer = face-hover zoom. */}
-      <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden bg-black">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-0 overflow-hidden bg-black"
+      >
         <div
           ref={parallaxRef}
           className="absolute inset-0 will-change-transform"
-          style={{ transform: 'translateY(calc(var(--p, 0) * -7%)) scale(calc(1 + var(--p, 0) * .2))' }}
+          style={{
+            transform:
+              "translateY(calc(var(--p, 0) * -7%)) scale(calc(1 + var(--p, 0) * .2))",
+          }}
         >
           <div
             ref={zoomRef}
             data-zoom="false"
             className="absolute inset-0 transition-transform duration-700 ease-out-quint data-[zoom=true]:scale-[1.035] motion-reduce:transition-none"
           >
-            {image.status === 'error' && (
+            {image.status === "error" && (
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_62%_42%,#2b2b2b_0%,#0d0d0d_55%,#000_100%)]" />
             )}
-            {image.status === 'ready' && heroSrc && (
-              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url("${heroSrc}")` }} />
+            {image.status === "ready" && heroSrc && (
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url("${heroSrc}")` }}
+              />
             )}
-            {glEnabled && heroSrc && <HeroGL src={heroSrc} heroRef={heroRef} ready={glReady} onReady={setGlReady} />}
+            {glEnabled && heroSrc && (
+              <HeroGL
+                src={heroSrc}
+                heroRef={heroRef}
+                ready={glReady}
+                onReady={setGlReady}
+              />
+            )}
             {/* Fallback glow that follows the pointer when WebGL is not running */}
             {fine && !reduced && !glReady && (
               <div
                 ref={glowRef}
                 className="pointer-events-none absolute inset-0 opacity-[var(--ga,0)] transition-opacity duration-300"
-                style={{ background: 'radial-gradient(circle 320px at var(--gx, 50%) var(--gy, 50%), rgba(255,99,15,.18), transparent 70%)' }}
+                style={{
+                  background:
+                    "radial-gradient(circle 320px at var(--gx, 50%) var(--gy, 50%), rgba(255,99,15,.18), transparent 70%)",
+                }}
               />
             )}
           </div>
@@ -192,20 +213,44 @@ export function Hero({ modalOpen, onIntroStart }: HeroProps) {
       <div className="absolute inset-x-[3%] top-[147px] z-[2] min-[1441px]:top-[155px] max-[701px]:top-[150px] max-[561px]:top-[145px]">
         <h1 className="flex items-start justify-between gap-[3%] pr-7 font-display text-[length:clamp(42px,16cqw,231px)] font-medium leading-[.727] tracking-[-.06em] text-white max-[701px]:pr-[22px] max-[701px]:text-[length:15cqw]">
           <span className="sr-only">{`${firstName} ${lastName}`.trim()}</span>
-          <span aria-hidden="true" className="flex">
-            {[...monogram].map((ch, i) => (
-              <Letter key={i} ch={ch} delay={delayFor(i)} phase={phase} />
-            ))}
-          </span>
-          <span aria-hidden="true" className="relative flex">
-            {[...firstName].map((ch, i) => (
-              <Letter key={`m${i}`} ch={ch} delay={delayFor(monogram.length + i)} phase={phase} />
-            ))}
-            <span className="flex font-[250]">
-              {[...lastName].map((ch, i) => (
-                <Letter key={`v${i}`} ch={ch} delay={delayFor(monogram.length + firstName.length + i)} phase={phase} />
+
+          {/* Name: stacked in the left corner, away from the face */}
+          <span
+            aria-hidden="true"
+            className="flex flex-col items-start text-left text-[length:clamp(34px,8.5cqw,130px)] leading-[.85] max-[901px]:text-[length:10cqw] max-[701px]:text-[length:13cqw]"
+          >
+            <span className="flex">
+              {[...firstName].map((ch, i) => (
+                <Letter
+                  key={`m${i}`}
+                  ch={ch}
+                  delay={delayFor(i)}
+                  phase={phase}
+                />
               ))}
             </span>
+            <span className="flex font-[250]">
+              {[...lastName].map((ch, i) => (
+                <Letter
+                  key={`v${i}`}
+                  ch={ch}
+                  delay={delayFor(firstName.length + i)}
+                  phase={phase}
+                />
+              ))}
+            </span>
+          </span>
+
+          {/* Monogram and [01]: right corner */}
+          <span aria-hidden="true" className="relative flex">
+            {[...monogram].map((ch, i) => (
+              <Letter
+                key={i}
+                ch={ch}
+                delay={delayFor(firstName.length + lastName.length + i)}
+                phase={phase}
+              />
+            ))}
             <sup
               className={`absolute left-full top-[.12em] ml-1 font-utility text-[14px] font-normal leading-none tracking-normal max-[701px]:text-xs ${sup.cls}`}
               style={sup.style}
@@ -219,8 +264,12 @@ export function Hero({ modalOpen, onIntroStart }: HeroProps) {
           className={`mt-[35px] flex justify-between gap-4 font-utility text-[13px] uppercase tracking-wide text-white max-[901px]:text-[11px] max-[701px]:mt-6 max-[701px]:text-[10px] ${role.cls}`}
           style={role.style}
         >
-          <span className="max-[701px]:max-w-[58%]">{PERSONA.role.toUpperCase()}</span>
-          <span className="text-right max-[701px]:max-w-[36%]">[ PORTFOLIO // SELECTED WORK ]</span>
+          <span className="max-[701px]:max-w-[58%]">
+            {PERSONA.role.toUpperCase()}
+          </span>
+          <span className="text-right max-[701px]:max-w-[36%]">
+            [ PORTFOLIO // SELECTED WORK ]
+          </span>
         </div>
 
         <div className="relative mt-[26px] h-[52px] max-[561px]:mt-5 max-[561px]:h-[46px]">
@@ -239,7 +288,7 @@ export function Hero({ modalOpen, onIntroStart }: HeroProps) {
               strokeLinecap="round"
               strokeLinejoin="round"
               className={`size-[25px] max-[561px]:size-[23px] ${
-                bouncing ? 'animate-arrow-bounce' : ''
+                bouncing ? "animate-arrow-bounce" : ""
               } group-hover:[animation-play-state:paused] group-focus-visible:[animation-play-state:paused] motion-reduce:animate-none`}
             >
               <path d="M12 4v15M5 12l7 7 7-7" />

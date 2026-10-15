@@ -6,7 +6,7 @@ export const PERSONA: Persona = {
   firstName: 'Richito',
   lastName: 'Quinañola', // add a surname here if you want it in the big hero name
   monogram: 'RQ', // Embedded Systems. Use any two letters you like.
-  role: 'Embedded Systems & Web Developer',
+  role: 'Full Stack Developer',
 tagline: 'I develop a local AI library chatbot with LLMs, semantic search and a Flask backend.',
   note: 'Student developer in Cebu, learning backend development.',
   heroLabel: 'Cebu, Philippines / Embedded & web / 001',
