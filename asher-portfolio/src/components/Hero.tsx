@@ -46,7 +46,7 @@ export function Hero({ modalOpen, onIntroStart }: HeroProps) {
 
   const reduced = useReducedMotion();
   const fine = useFinePointer();
-  const wide = useMediaQuery('(min-width: 769px)');
+  const wide = useMediaQuery('(min-width: 902px)');
   const pageVisible = usePageVisible();
   const onScreen = useOnScreen(heroRef);
 
@@ -100,7 +100,7 @@ export function Hero({ modalOpen, onIntroStart }: HeroProps) {
 
   // Zoom only while the pointer is over the face (x .40-.79, y .075-.86 of the cover-cropped image).
   const onPointerMove = (e: ReactPointerEvent<HTMLElement>) => {
-    if (!fine || reduced || modalOpen || e.pointerType === 'touch') return;
+    if (!fine || !wide || reduced || modalOpen || e.pointerType === 'touch') return;
     const rect = e.currentTarget.getBoundingClientRect();
 
     if (image.status === 'ready') {
@@ -156,7 +156,7 @@ export function Hero({ modalOpen, onIntroStart }: HeroProps) {
       {/* z-0: portrait + WebGL canvas. Outer layer = scroll parallax, inner layer = face-hover zoom. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-0 overflow-hidden bg-black"
+        className="absolute inset-0 z-0 overflow-hidden bg-black max-[901px]:top-[40%] max-[901px]:[-webkit-mask-image:linear-gradient(180deg,transparent_0,#000_22%)] max-[901px]:[mask-image:linear-gradient(180deg,transparent_0,#000_22%)]"
       >
         <div
           ref={parallaxRef}
@@ -189,7 +189,7 @@ export function Hero({ modalOpen, onIntroStart }: HeroProps) {
               />
             )}
             {/* Fallback glow that follows the pointer when WebGL is not running */}
-            {fine && !reduced && !glReady && (
+               {wide && fine && !reduced && !glReady && (
               <div
                 ref={glowRef}
                 className="pointer-events-none absolute inset-0 opacity-[var(--ga,0)] transition-opacity duration-300"
