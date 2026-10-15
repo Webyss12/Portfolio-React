@@ -5,7 +5,7 @@ import type { Assets, Persona, Project, Service } from '../types';
 export const PERSONA: Persona = {
   firstName: 'Richito',
   lastName: 'Quinañola', // add a surname here if you want it in the big hero name
-  monogram: 'ES', // Embedded Systems. Use any two letters you like.
+  monogram: 'RQ', // Embedded Systems. Use any two letters you like.
   role: 'Embedded Systems & Web Developer',
 tagline: 'I develop a local AI library chatbot with LLMs, semantic search and a Flask backend.',
   note: 'Student developer in Cebu, learning backend development.',
@@ -21,7 +21,7 @@ tagline: 'I develop a local AI library chatbot with LLMs, semantic search and a 
     'I connect hardware, cloud services and web interfaces into systems that work as a whole. I study at Cebu Technological University, Ginatilan Extension Campus, and build projects on the side.',
   disciplines: ['AI Chatbot', 'Backend & Data', 'Embedded Systems'],
   contactIntro: 'Have a project, looking for an internship, or something to build in mind? Tell me about it.',
-  email: 'quinanolarich@gmail.com', // TODO: check this is the address you want visitors to use
+  email: 'quinanolarichitojr@gmail.com', // TODO: check this is the address you want visitors to use
   location: 'Cebu, Philippines',
   socialLinks: [{ label: 'GitHub', href: 'https://github.com/Webyss12' }],
 };
@@ -29,7 +29,7 @@ tagline: 'I develop a local AI library chatbot with LLMs, semantic search and a 
 // Put your portrait at public/hero.jpg, or set a different path/URL here.
 // Any other key can be set to an image URL (for example a real photo of a project) to replace that built-in artwork.
 export const ASSETS: Assets = {
-  hero: '/hero.jpg',
+  hero: '/hero.png',
   statement: null,
   scoreboard: null,
   smartled: null,
