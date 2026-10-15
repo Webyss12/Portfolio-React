@@ -277,7 +277,7 @@ export function Hero({ modalOpen, onIntroStart }: HeroProps) {
             href="#about"
             onClick={goToAbout}
             aria-label="Scroll down to About"
-            className="group absolute left-[70%] top-0 flex size-[52px] -translate-x-1/2 items-center justify-center rounded-full border border-white/60 bg-black/[.32] text-white transition-colors duration-250 hover:border-accent hover:bg-accent hover:text-black focus-visible:border-accent focus-visible:bg-accent focus-visible:text-black max-[561px]:size-[46px]"
+            className="group absolute right-[0%] top-0 flex size-[52px] items-center justify-center rounded-full border border-white/60 bg-black/[.32] text-white transition-colors duration-250 hover:border-accent hover:bg-accent hover:text-black focus-visible:border-accent focus-visible:bg-accent focus-visible:text-black max-[561px]:size-[46px]"
           >
             <svg
               aria-hidden="true"
