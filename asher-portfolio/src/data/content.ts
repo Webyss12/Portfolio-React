@@ -33,7 +33,7 @@ export const ASSETS: Assets = {
   statement: null,
   scoreboard: null,
   smartled: null,
-  chatbot: null,
+  chatbot: '/chatbot.png',
   waterworks: null,
   fileserver: null,
   portfolio: null,

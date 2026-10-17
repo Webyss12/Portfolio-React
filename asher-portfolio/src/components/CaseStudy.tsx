@@ -37,7 +37,7 @@ function CaseBody({ project, onClose }: { project: Project; onClose: () => void 
         <p className="mt-6 max-w-[760px] text-[20px] leading-snug text-[#d8d5cb]">{project.summary}</p>
 
         <div className="mt-10 flex justify-center border-y border-[#333] bg-[#0b0b0b] py-8">
-          <Artwork name={project.coverKey} labelled className="aspect-square w-full max-w-[540px]" />
+          <Artwork name={project.coverKey} labelled className="w-full max-w-[860px] max-h-[540px]" />
         </div>
 
         <dl className="my-10 grid grid-cols-2 gap-x-8 gap-y-6 max-[561px]:grid-cols-1">
